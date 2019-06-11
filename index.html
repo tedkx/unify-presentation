@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/presentation.css" />
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? 'css/print/pdf.css'
+        : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+  </head>
+  <body class="europresentation part-1">
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div id="presentation-title">
+            <h1>Unify Application Development</h1>
+          </div>
+        </section>
+        <section>
+          <h3>
+            <span class="part-indicator">Part 1</span> Architecture Overview
+          </h3>
+          <ul>
+            <li class="fragment">User Interface</li>
+            <li class="fragment">Widgets / Core / Utilities</li>
+            <li class="fragment">Apps</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Things to point out</h3>
+          <ul>
+            <li class="fragment">No standalone apps</li>
+            <li class="fragment">
+              Packages published in private registry (Nexus)
+            </li>
+            <li class="fragment">Dependencies on Unify</li>
+            <li class="fragment">Using Unify functionality (Authentication)</li>
+            <li class="fragment">Apps can share data</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Development quirks</h3>
+          <ul>
+            <li class="fragment">Linked packages</li>
+            <li class="fragment">"watched" app and Unify source</li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            <span class="part-indicator">Part 2</span>Creating a New Application
+          </h3>
+        </section>
+        <section>
+          <h3>Application Exports</h3>
+          <div style="display:flex">
+            <ul>
+              <li class="fragment">UfeEntry</li>
+              <li class="fragment">ApiConfig</li>
+              <li class="fragment">Reducer</li>
+              <li class="fragment">UAM Application Name</li>
+            </ul>
+            <ul>
+              <li class="fragment">Routes</li>
+              <li class="fragment">Menus</li>
+              <li class="fragment">UAM Application Name</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3>User Interface Modifications</h3>
+          <ul>
+            <li class="fragment">Package installation</li>
+            <li class="fragment">config/index.js</li>
+            <li class="fragment">UAM Application Name</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>
+            <span class="part-indicator">Part 3</span>Beginning Development
+          </h3>
+        </section>
+        <section>
+          <h3>
+            Using
+            <a
+              href="http://zuul/bitbucket/projects/UNF/repos/widget/browse"
+              target="_blank"
+              >widgets</a
+            >
+          </h3>
+        </section>
+        <section>
+          <h3>
+            Using
+            <a
+              href="http://zuul/bitbucket/projects/UNF/repos/utilities/browse"
+              target="utilities"
+              >core</a
+            >
+          </h3>
+        </section>
+
+        <section>
+          <h3><span class="part-indicator">Part 4</span>Data Flow</h3>
+        </section>
+        <section>
+          <h3>
+            Using
+            <a
+              href="http://zuul/bitbucket/projects/UNF/repos/core/browse"
+              target="_blank"
+              >core</a
+            >
+          </h3>
+          <ul>
+            <li class="fragment">
+              Mechanism combining react-redux connect, reducers & sagas
+            </li>
+            <li class="fragment">Common api calls simplification</li>
+            <li class="fragment">Uses service instructions</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Core Connect()</h3>
+          <div>
+            <ul>
+              <li class="fragment">
+                Supplies call() method for calling services
+              </li>
+              <li class="fragment">
+                Supplies a triplet of service-related props
+              </li>
+              <li class="fragment">
+                Keeps all data on the core reducer (can be changed)
+              </li>
+              <li class="fragment">
+                After the 3rd argument, takes the same arguments the react-redux
+                connect takes
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3>Core Connect()</h3>
+          <div>
+            <ul>
+              <li class="fragment">
+                Connected Component
+                <pre><code class="javascript">import { connect } from @eurobank-unify/core;
+import MyComponent from 'my-component';
+
+connect(MyComponent, ['usersList'])
+                </code></pre>
+              </li>
+              <li class="fragment">
+                Component
+                <pre><code class="javascript">import React from 'react';
+
+class MyComponent extends React.Component {
+  componentDidMount() {
+    this.props.call('usersList');
+  }
+  componentWillUnmount() {
+    this.props.clear('usersList');
+  }
+  render() {
+    return this.props.usersListPending
+      ? <div>Loading</div>
+      : <div>{ this.props.usersList.map(u => <span>{u.username}</span>)}</div>
+  }
+}
+                </code></pre>
+              </li>
+              <li class="fragment">Reducer property</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3>Service instructions</h3>
+          <div>
+            <ul>
+              <li class="fragment">React component property</li>
+              <li class="fragment">Api endpoint</li>
+              <li class="fragment">Reducer property</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h3>Service instructions: Initialization</h3>
+          <div>
+            <ul>
+              <li class="fragment">
+                <span>String</span>
+                <pre><code>const serviceInstruction = 'userList'</code></pre>
+              </li>
+              <li class="fragment">
+                <span>Object</span>
+                <pre><code>import { createServiceInstruction} from @eurobank-unify/core;
+const serviceInstruction = createServiceInstruction('userList')</code></pre>
+              </li>
+              <li class="fragment">Reducer property</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h3><span class="part-indicator">Part 5</span>Forms</h3>
+        </section>
+
+        <section>
+          <h3><span class="part-indicator">Bonus</span>Deployment</h3>
+        </section>
+
+        <section>
+          <h3>Thank you!</h3>
+        </section>
+      </div>
+    </div>
+
+    <script src="js/reveal.js"></script>
+    <script src="js/training.js"></script>
+  </body>
+</html>
+<!--<pre><code class="javascript">const timer = () => setTimeout(() => console.log('timed out'))</code></pre>-->
