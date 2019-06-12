@@ -96,7 +96,7 @@
           </ul>
         </section>
 
-        <section>
+        <section id="part-3">
           <h3>
             <span class="part-indicator">Part 3</span>Beginning Development
           </h3>
@@ -110,16 +110,40 @@
               >widgets</a
             >
           </h3>
+          <ul style="width:70%">
+            <li class="fragment">Collection of UI Components</li>
+            <li class="fragment">
+              Based on
+              <a href="https://material-ui.com/" target="_blank">Material UI</a>
+            </li>
+            <li class="fragment">
+              Example import
+              <pre><code class="javascript">import { LoaderOverlay, TreeView } from '@eurobank-unify/widgets'</code></pre>
+            </li>
+          </ul>
         </section>
         <section>
           <h3>
             Using
             <a
               href="http://zuul/bitbucket/projects/UNF/repos/utilities/browse"
-              target="utilities"
-              >core</a
+              target="_blank"
+              >utilities</a
             >
           </h3>
+          <ul style="width: 80%">
+            <li class="fragment">Common functionality split by section</li>
+            <li class="fragment">
+              Basic helpers, i18n, tools for file saving, communication with
+              Local Device Handler
+            </li>
+            <li class="fragment">
+              Example imports
+              <pre><code class="javascript">import { createErrorBoundary } from '@eurobank-unify/utilities/ErrorBoundary';
+import { isFunc, isNullOrWhitespace } from '@eurobank-unify/utilities/helpers'
+import { saveBase64 } from '@eurobank-unify/utilities/file'</code></pre>
+            </li>
+          </ul>
         </section>
 
         <section>
@@ -163,9 +187,35 @@
           </div>
         </section>
         <section>
+          <h3>Core Connect: Component Props</h3>
+          <ul>
+            <li>
+              call / canCall
+              <pre><code class="javascript">if(this.props.canCall('myService')) {
+  this.props.call('myService')
+}</code></pre>
+            </li>
+            <li>
+              Triplet of props: pending / error
+              <pre><code class="javascript">render() {
+  const { 
+    myService, 
+    myServicePending, 
+    myServiceError 
+  } = this.props;
+}
+            </code></pre>
+            </li>
+            <li>
+              clear
+              <pre><code class="javascript">this.props.clear('myService'))</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
           <h3>Core Connect()</h3>
           <div>
-            <ul>
+            <ul style="width: 80%">
               <li class="fragment">
                 Connected Component
                 <pre><code class="javascript">import { connect } from @eurobank-unify/core;
@@ -193,7 +243,6 @@ class MyComponent extends React.Component {
 }
                 </code></pre>
               </li>
-              <li class="fragment">Reducer property</li>
             </ul>
           </div>
         </section>
@@ -210,15 +259,22 @@ class MyComponent extends React.Component {
         <section>
           <h3>Service instructions: Initialization</h3>
           <div>
-            <ul>
+            <ul style="width: 80%">
               <li class="fragment">
-                <span>String</span>
-                <pre><code>const serviceInstruction = 'userList'</code></pre>
+                <span>One string to rule 'em all</span>
+                <pre><code>const serviceInstruction = 'userList'
+// OR
+import { createServiceInstruction} from @eurobank-unify/core;
+const serviceInstruction = createServiceInstruction('userList')
+                </code></pre>
               </li>
               <li class="fragment">
-                <span>Object</span>
+                <span>Customizations through second parameter</span>
                 <pre><code>import { createServiceInstruction} from @eurobank-unify/core;
-const serviceInstruction = createServiceInstruction('userList')</code></pre>
+const serviceInstruction = createServiceInstruction('userList', {
+  componentProperty: 'myUsers',
+  apiRoute: 'fetchMyUsers'
+})</code></pre>
               </li>
               <li class="fragment">Reducer property</li>
             </ul>
