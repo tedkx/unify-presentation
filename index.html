@@ -40,10 +40,32 @@
           <h3>
             <span class="part-indicator">Part 1</span> Architecture Overview
           </h3>
-          <ul>
+          <ul style="width: 70%">
             <li class="fragment">User Interface</li>
             <li class="fragment">Widgets / Core / Utilities</li>
             <li class="fragment">Apps</li>
+            <li class="fragment" style="list-style-type: none">
+              <div id="stack">
+                <div style="grid-area: apps1;background: #ACF">
+                  Apps
+                </div>
+                <div style="grid-area: apps2;background: #ACF">
+                  Apps
+                </div>
+                <div style="grid-area: widgets;background: #FCB">
+                  Widgets
+                </div>
+                <div style="grid-area: utilities;background: #FCB">
+                  Utilities
+                </div>
+                <div style="grid-area: core;background: #FCB">
+                  Core
+                </div>
+                <div style="grid-area: unify;background: #CFC">
+                  Unify
+                </div>
+              </div>
+            </li>
           </ul>
         </section>
         <section>
@@ -69,6 +91,14 @@
           <h3>
             <span class="part-indicator">Part 2</span>Creating a New Application
           </h3>
+          <span style="font-size: 22px"
+            >Seed Project:
+            <a
+              href="http://zuul/bitbucket/users/v-tkalaitzidis/repos/unify-app-seed/browse"
+              target="_blank"
+              >http://zuul/bitbucket/scm/~v-tkalaitzidis/unify-app-seed.git</a
+            ></span
+          >
         </section>
         <section>
           <h3>Application Exports</h3>
@@ -82,7 +112,7 @@
             <ul>
               <li class="fragment">Routes</li>
               <li class="fragment">Menus</li>
-              <li class="fragment">UAM Application Name</li>
+              <li class="fragment">Version</li>
             </ul>
           </div>
         </section>
@@ -92,7 +122,6 @@
           <ul>
             <li class="fragment">Package installation</li>
             <li class="fragment">config/index.js</li>
-            <li class="fragment">UAM Application Name</li>
           </ul>
         </section>
 
@@ -100,6 +129,99 @@
           <h3>
             <span class="part-indicator">Part 3</span>Beginning Development
           </h3>
+        </section>
+        <section id="current">
+          <h3>
+            Quick Recap:
+            <span style="text-transform: none">HTML/CSS/JavaScript</span>
+          </h3>
+          <ul>
+            <li class="fragment" id="recap-html">HTML: Markup</li>
+            <li class="fragment" id="recap-css">CSS: Styling</li>
+            <li class="fragment" id="recap-js">JavaScript: Behaviour</li>
+          </ul>
+          <div id="stickman">
+            <div id="head">&lt;html&gt;</div>
+            <div id="body">&lt;body&gt;</div>
+            <div id="left-hand" class="part">&lt;body&gt;</div>
+            <div id="right-hand" class="part">&lt;body&gt;</div>
+            <div id="left-leg" class="part">&lt;body&gt;</div>
+            <div id="right-leg" class="part">&lt;body&gt;</div>
+          </div>
+        </section>
+        <section>
+          <h3>
+            Quick Recap:
+            <span style="text-transform: none">JavaScript Arrays</span>
+          </h3>
+          <ul>
+            <li class="fragment">Map</li>
+            <li class="fragment">Filter</li>
+            <li class="fragment">ForEach</li>
+            <li class="fragment">Reduce</li>
+            <li class="fragment">
+              Also good: find(), some(), <br />every(), destructuring
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            Quick Recap:
+            <span style="text-transform: none">JavaScript Objects</span>
+          </h3>
+          <ul>
+            <li class="fragment">Object.keys()</li>
+            <li class="fragment">Destructuring</li>
+          </ul>
+          <h3 class="fragment">JavaScript Modules</h3>
+          <ul>
+            <li class="fragment">Importing / exporting</li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            Quick Recap:
+            <span style="text-transform: none">JavaScript</span>
+          </h3>
+          <ul>
+            <li class="fragment">String interpolation</li>
+            <li class="fragment">Arrow functions</li>
+            <li class="fragment">Ternary operator</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Quick Recap: <span style="text-transform: none">React</span></h3>
+          <ul>
+            <li class="fragment">state vs props</li>
+            <li class="fragment">Classes vs Functional compoments</li>
+            <li class="fragment">
+              Component lifecycle
+              <div style="text-align: center">
+                <img
+                  src="images/react-lifecycle.jpeg"
+                  style=" max-height: 400px"
+                />
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Quick Recap: <span style="text-transform: none">Redux</span></h3>
+          <div style="display:flex; justify-content: space-evenly">
+            <ul>
+              <li class="fragment">State</li>
+              <li class="fragment">Reducers</li>
+            </ul>
+            <ul>
+              <li class="fragment">Actions</li>
+              <li class="fragment">
+                Sagas
+              </li>
+            </ul>
+          </div>
+          <div style="text-align: center" class="fragment">
+            <img src="images/redux.png" style=" max-height: 400px" />
+          </div>
         </section>
         <section>
           <h3>
@@ -180,8 +302,8 @@ import { saveBase64 } from '@eurobank-unify/utilities/file'</code></pre>
                 Keeps all data on the core reducer (can be changed)
               </li>
               <li class="fragment">
-                After the 3rd argument, takes the same arguments the react-redux
-                connect takes
+                Usage
+                <pre><code class="javascript">connect(Component, [serviceInstructions], reducer, ...reduxConnectProps)</code></pre>
               </li>
             </ul>
           </div>
@@ -248,6 +370,13 @@ class MyComponent extends React.Component {
         </section>
         <section>
           <h3>Service instructions</h3>
+          <p style="font-size: 22px">
+            Make a call to <span class="emphasis">apiRoute</span>, store the
+            response on <span class="emphasis">reducerProperty</span> in the
+            <span class="emphasis">core</span> reducer and make it available to
+            my component through
+            <span class="emphasis">componentProperty</span> prop
+          </p>
           <div>
             <ul>
               <li class="fragment">React component property</li>
@@ -283,6 +412,15 @@ const serviceInstruction = createServiceInstruction('userList', {
 
         <section>
           <h3><span class="part-indicator">Part 5</span>Forms</h3>
+        </section>
+
+        <section>
+          <h3>Widgets Form</h3>
+          <ul>
+            <li class="fragment">Collection of input fields</li>
+            <li class="fragment">Controlled / uncontrolled</li>
+            <li class="fragment">Ready / custom validations</li>
+          </ul>
         </section>
 
         <section>

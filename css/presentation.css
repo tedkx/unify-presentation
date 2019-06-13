@@ -33,3 +33,102 @@ body.europresentation {
   display: block;
   border-bottom: solid 3px #b00;
 }
+
+.emphasis {
+  font-weight: bold;
+  color: #2299cc;
+  text-shadow: 1px 1px #333;
+}
+
+#stack {
+  display: grid;
+  grid-template-areas:
+    'apps1 apps1 apps1 apps2 apps2 apps2'
+    'apps1 apps1 apps1 widgets utilities core'
+    'unify unify unify unify unify unify'
+    'unify unify unify unify unify unify';
+  grid-gap: 10px;
+  background-color: #888888;
+  padding: 10px;
+}
+
+#stack > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 14px 0;
+  font-size: 24px;
+  color: #222;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#stickman {
+  position: relative;
+  width: 80%;
+  height: 340px;
+  background: #eef;
+  margin: 15px auto 0;
+  padding: 30px 0 20px;
+}
+#stickman > div {
+  background: transparent;
+  color: #000;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#stickman.blue > div {
+  background: #349 !important;
+}
+#stickman.red > div {
+  background: #943 !important;
+}
+#stickman.green > div {
+  background: #494 !important;
+}
+#stickman.transformed > div {
+  position: relative;
+  background: #000;
+  color: #fff;
+  margin: 0 auto !important;
+  border-radius: 15px;
+  font-size: 10px;
+  overflow: hidden;
+}
+#stickman.transformed .part {
+  width: 20px;
+  height: 120px;
+  transform: translate(-120px);
+}
+#stickman.transformed #head {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+#stickman.transformed #body {
+  width: 80px;
+  height: 150px;
+}
+#stickman #head {
+  margin-left: -80px;
+}
+#stickman #left-hand {
+  margin-left: 80px;
+}
+#stickman #right-hand {
+  margin-left: 80px;
+}
+#stickman #right-leg {
+  margin-left: -80px;
+}
+#stickman.transformed #left-hand {
+  transform: translate(-80px, -220px) rotate(-65deg);
+}
+#stickman.transformed #right-hand {
+  transform: translate(80px, -340px) rotate(65deg);
+}
+#stickman.transformed #left-leg {
+  transform: translate(-20px, -250px) rotate(5deg);
+}
+#stickman.transformed #right-leg {
+  transform: translate(20px, -370px) rotate(-5deg);
+}
