@@ -121,7 +121,8 @@
           <h3>User Interface Modifications</h3>
           <ul>
             <li class="fragment">Package installation</li>
-            <li class="fragment">config/index.js</li>
+            <li class="fragment">Package imports: src/config/index.js</li>
+			<li class="fragment">API URL: public/config.js</li>
           </ul>
         </section>
 
@@ -425,6 +426,26 @@ const serviceInstruction = createServiceInstruction('userList', {
 
         <section>
           <h3><span class="part-indicator">Bonus</span>Deployment</h3>
+          <ul>
+            <li class="fragment">
+              <a href="https://openshift.alt.ocp:8443" target="_blank"
+                >https://openshift.alt.ocp:8443</a
+              >
+            </li>
+            <li class="fragment">
+              Publish App: Builds > Builds > app-[application name] > Start
+              Build
+            </li>
+            <li class="fragment">
+              Build Unify: Builds > Builds > unify-builder > Start Build
+            </li>
+            <li class="fragment">
+              Build Unify-runtime: Triggered automatically
+            </li>
+            <li class="fragment">
+              Check deployment: Applications > Deployments > unify
+            </li>
+          </ul>
         </section>
 
         <section>
